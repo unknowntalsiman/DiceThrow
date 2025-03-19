@@ -18,14 +18,20 @@ class DieFragment : Fragment() {
 
     companion object {
         const val CURRENT_ROLL = "current_roll"
+
+        fun newInstance(sides: Int): DieFragment {
+            return DieFragment().apply {
+                arguments = Bundle().apply {
+                    putInt("sidenumber", sides)
+                }
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            it.getInt(DIESIDE).run {
-                dieSides = this
-            }
+            dieSides = it.getInt(DIESIDE, 6)
         }
     }
 
